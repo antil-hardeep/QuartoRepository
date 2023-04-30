@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.475">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Hardeep Antil">
+<meta name="dcterms.date" content="2023-04-30">
+
+<title>A Data-Driven Quarto Report</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="QuartoAssignment_files/libs/clipboard/clipboard.min.js"></script>
+<script src="QuartoAssignment_files/libs/quarto-html/quarto.js"></script>
+<script src="QuartoAssignment_files/libs/quarto-html/popper.min.js"></script>
+<script src="QuartoAssignment_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="QuartoAssignment_files/libs/quarto-html/anchor.min.js"></script>
+<link href="QuartoAssignment_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="QuartoAssignment_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="QuartoAssignment_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="QuartoAssignment_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="QuartoAssignment_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">A Data-Driven Quarto Report</h1>
+<p class="subtitle lead">Quarto Assignment</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Hardeep Antil </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 30, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="child-poverty" class="level2">
+<h2 class="anchored" data-anchor-id="child-poverty">Child Poverty</h2>
+<p>Child Poverty is a significant social issue that is affecting millions of children worldwide due to the <em>economic</em>, <em>social</em>, and <em>environmental</em> factors. The consequences of child poverty can be devastating, including:</p>
+<ul>
+<li>malnutrition</li>
+<li>poor health</li>
+<li>lack of education and</li>
+<li>limited opportunities for a better future.</li>
+</ul>
+<p>In this quarto report, I will raise awareness on child poverty wherein I will analyze the data, gain insights and explore the extent of child poverty and life expectancy at birth globally using four R visualizations:</p>
+<ol type="1">
+<li>World map</li>
+<li>Bar chart</li>
+<li>Time series plot</li>
+<li>Scatter plots with linear regression</li>
+</ol>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>To create the visualizations, I will use data from one of the data file, unicef_indicator_1.csv from the <strong>UNICEF</strong> database and therein is included a specific indicator- “Percentage Children suffering exactly five deprivations. Homogeneous moderate standards” which measures how many children suffer at least five deprivations using homogenous standards and moderate thresholds. For more information about this indicator: <a href="https://data.unicef.org/indicator-profile/PV_CHLD_DPRV-E5-HS/" class="uri">https://data.unicef.org/indicator-profile/PV_CHLD_DPRV-E5-HS/</a></p>
+<p>One more data file, unicef_metadata.csv from the World Development Indicators by the <strong>World Bank</strong> (<a href="https://databank.worldbank.org/source/worlddevelopment-indicators" class="uri">https://databank.worldbank.org/source/worlddevelopment-indicators</a>) will also be used alongwith the indicator file for the scatter plot visualisation and time series visualisation.</p>
+</section>
+<section id="world-map-visualization-global-child-poverty-rates-from-2011-to-2018" class="level1">
+<h1>World Map Visualization: Global Child Poverty Rates from 2011 to 2018</h1>
+<p>Children experience poverty differently from adults as they have unique needs to survive and thrive. Their dreams and hopes are different, and they rely on adults to support and take care of their necessities, rather than having to earn a living themselves. Therefore, when assessing child poverty, it is crucial to use a direct multidimensional measurement that considers various dimensions, such as clothing, education, health, housing, information, nutrition, play, sanitation, and water, which are all essential rights that constitute poverty.</p>
+<p>The below world map visualisation shows the percentage of children suffering exactly five deprivations such as education, health, housing, nutrition, sanitation, and water based on comparable standards and moderate thresholds between the years 2011 and 2018. <strong><em>Africa</em></strong> continent has highest rates of children living in poverty. <strong><em>Madagascar</em></strong> is the country with highest proportion of children suffering from exactly five deprivations.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="QuartoAssignment_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="bar-chart-poverty-rates-over-time2011-to-2018" class="level1">
+<h1>Bar Chart: Poverty Rates Over Time(2011 to 2018)</h1>
+<p>The second visualization of a bar chart shows how the child poverty rates have changed globally from 2011 to 2018.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="QuartoAssignment_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="scatter-plot-with-linear-regression-countrywise-correlation-between-life-expectancy-at-birth-and-the-year" class="level1">
+<h1>Scatter Plot with Linear Regression: Countrywise Correlation between Life expectancy at birth and the year</h1>
+<p>The third visualization uses the combination of the two dataset files- unicef_indicator_1.csv and unicef_metadata.csv displaying a scatter plot with linear regression showing the global correlation between the life expectancy at birth and the time period from 1960 to 2020.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="QuartoAssignment_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="time-series-plot-countrywise-changes-in-life-expectancy-at-birth-over-time-from-2011-to-2018" class="level1">
+<h1>Time Series Plot: Countrywise changes in life expectancy at birth over time from 2011 to 2018</h1>
+<p>The fourth visualization is a time series plot also uses the combination of the two dataset files- unicef_indicator_1.csv and unicef_metadata.csv and shows how the life expectancy at birth have changed globally from 1960 to 2020.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="QuartoAssignment_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

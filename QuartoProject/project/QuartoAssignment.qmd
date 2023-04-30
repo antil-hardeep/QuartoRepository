@@ -1,0 +1,132 @@
+---
+title: "A Data-Driven Quarto Report"
+subtitle: "Quarto Assignment"
+author: "Hardeep Antil"
+date: "04/30/2023"
+format: html
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+## Child Poverty
+
+Child Poverty is a significant social issue that is affecting millions of children worldwide due to the *economic*, *social*, and *environmental* factors. The consequences of child poverty can be devastating,
+including:
+
+ - malnutrition
+ - poor health
+ - lack of education and 
+ - limited opportunities for a better future.
+
+In this quarto report, I will raise awareness on child poverty wherein I will analyze the data, gain insights and explore the extent of child poverty and life expectancy at birth globally using four R visualizations:
+
+ 1. World map
+ 2. Bar chart
+ 3. Time series plot
+ 4. Scatter plots with linear regression
+
+
+## Data
+
+To create the visualizations, I will use data from one of the data file, unicef_indicator_1.csv from the
+**UNICEF** database and therein is included a specific indicator- "Percentage Children suffering exactly five deprivations. Homogeneous moderate standards" which measures how many children suffer at least five deprivations using homogenous standards and moderate thresholds. For more information
+about this indicator: 
+<https://data.unicef.org/indicator-profile/PV_CHLD_DPRV-E5-HS/>
+
+One more data file, unicef_metadata.csv from the World Development Indicators by the **World Bank** (<https://databank.worldbank.org/source/worlddevelopment-indicators>) will also be used alongwith the indicator file for the scatter plot visualisation and time series visualisation.
+
+
+
+```{r}
+#| label: setup
+#| include: false
+library(tidyverse)
+unicef_indicator_1<- read_csv("/cloud/project/unicef_indicator_1.csv")
+unicef_metadata<- read_csv("/cloud/project/unicef_metadata.csv")
+```
+
+# World Map Visualization: Global Child Poverty Rates from 2011 to 2018
+Children experience poverty differently from adults as they have unique needs to survive and thrive. Their dreams and hopes are different, and they rely on adults to support and take care of their necessities, rather than having to earn a living themselves. Therefore, when assessing child poverty, it is crucial to use a direct multidimensional measurement that considers various dimensions, such as clothing, education, health, housing, information, nutrition, play, sanitation, and water, which are all essential rights that constitute poverty.
+
+The below world map visualisation shows the percentage of children suffering exactly five deprivations such as education, health, housing, nutrition, sanitation, and water based on comparable standards and moderate thresholds between the years 2011 and 2018. ***Africa*** continent has highest rates of children living in poverty. ***Madagascar*** is the country with highest proportion of children suffering from exactly five deprivations.
+
+```{r}
+world_map <- map_data("world") 
+map_unicef_indicator_1 <- full_join(world_map, unicef_indicator_1, by = c("region" = "country"))
+ggplot(data = map_unicef_indicator_1) +
+  aes(x = long, y = lat, group = group, fill = obs_value) +
+  geom_polygon() +
+scale_fill_gradient(low = "green", high = "red", na.value = "grey") +
+  labs(
+    title = "Percentage of Children suffering exactly five deprivations (2011 to 2018)",
+    subtitle = "Countries in grey have no data ",
+    caption = "Source: R package {unicef_indicator_1}",
+    x = "Longitude",
+    y = "Latitude",
+    fill = "Obs_Value"
+  ) +
+ theme_linedraw()
+```
+
+# Bar Chart: Poverty Rates Over Time(2011 to 2018)
+The second visualization of a bar chart shows how the child poverty rates have changed globally from 2011 to 2018.
+```{r}
+unicef_data_by_year <- unicef_indicator_1 %>% 
+  group_by(time_period) %>% 
+  summarise(Values = sum(obs_value))
+ggplot(data = unicef_data_by_year) +
+  aes(x = time_period, y = Values, fill = Values ) +
+  geom_col() +
+theme_light() +
+
+theme(text = element_text(size = 14)) +
+labs(
+    x = "Time Period",
+    y = "Sum of Observed Values",
+title = "Bar Chart of Time Period vs Sum of Observed Values"
+  )
+```
+
+# Scatter Plot with Linear Regression: Countrywise Correlation between Life expectancy at birth and the year
+The third visualization uses the combination of the two dataset files- unicef_indicator_1.csv and unicef_metadata.csv displaying a scatter plot with linear regression showing the global correlation between the life expectancy at birth and the time period from 1960 to 2020.
+```{r}
+unicef_filtered_data_based_on_sex <- filter(unicef_indicator_1, sex == "Total")
+unicef_selected_data_from_filtered_data <- unicef_filtered_data_based_on_sex %>%
+select(country, time_period, obs_value, sex)
+ 
+unicef_metadata_selected_data <- unicef_metadata %>%
+select(country, time_period = year, `GNI (current US$)`, `Life expectancy at birth, total (years)`, `Population, total`)
+
+manual_full_joined_data <- full_join(unicef_selected_data_from_filtered_data, unicef_metadata_selected_data, by = c("time_period", "country"))
+
+ggplot(data = manual_full_joined_data) +
+  aes(x = time_period, y = `Life expectancy at birth, total (years)`, colour = country) +
+  geom_point() +
+geom_smooth(method = "lm") +
+  labs(
+    x = "Time Period",
+    y = "Life Expectancy at birth",
+    title = "Countrywise Life Expectancy at birth vs Time Period"
+  ) +
+theme_minimal() +
+theme(text = element_text(size = 14))+
+ theme(legend.position="none")
+```
+
+# Time Series Plot: Countrywise changes in life expectancy at birth over time from 2011 to 2018
+The fourth visualization is a time series plot also uses the combination of the two dataset files- unicef_indicator_1.csv and unicef_metadata.csv and shows how the life expectancy at birth have changed globally from 1960 to 2020.
+```{r}
+ggplot(data = unicef_metadata) +
+  aes(x = year, y = `Life expectancy at birth, total (years)`, color = country) +
+  geom_line() +
+  labs(
+    x = "Year",
+    y = "Life Expectancy at birth",
+    title = "Countrywise Life Expectancy at birth vs Year"
+  ) +
+theme_grey() +
+theme(text = element_text(size = 14)) +
+  guides(color ="none")
+```
